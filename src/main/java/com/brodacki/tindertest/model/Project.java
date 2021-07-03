@@ -1,7 +1,7 @@
 package com.brodacki.tindertest.model;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Table(name = "projects")
@@ -11,8 +11,6 @@ public class Project {
     Integer id;
     String description;
 
-    @OneToMany
-    private List<ProjectDev> projectDevs;
 
     public Project() {
     }
@@ -33,11 +31,5 @@ public class Project {
         this.description = description;
     }
 
-    public List<ProjectDev> getProjectDevs() {
-        return projectDevs;
-    }
 
-    public void setProjectDevs(List<ProjectDev> projectDevs) {
-        this.projectDevs = projectDevs;
-    }
 }

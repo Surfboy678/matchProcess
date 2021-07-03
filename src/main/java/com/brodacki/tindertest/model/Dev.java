@@ -12,8 +12,7 @@ public class Dev {
 
   private String content;
 
-  @OneToMany
-  private List<DevProject> devProjects;
+
 
   public Dev() {}
 
@@ -33,13 +32,7 @@ public class Dev {
     this.content = content;
   }
 
-  public List<DevProject> getDevProjects() {
-    return devProjects;
-  }
 
-  public void setDevProjects(List<DevProject> devProjects) {
-    this.devProjects = devProjects;
-  }
 }
 
 
