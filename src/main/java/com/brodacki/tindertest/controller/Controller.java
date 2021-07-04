@@ -2,14 +2,18 @@ package com.brodacki.tindertest.controller;
 
 import com.brodacki.tindertest.model.Dev;
 import com.brodacki.tindertest.model.Project;
+import com.brodacki.tindertest.dto.ProjectDevDto;
 import com.brodacki.tindertest.model.TableToMatch;
 import com.brodacki.tindertest.repository.DevRepository;
 import com.brodacki.tindertest.repository.ProjectRepository;
 import com.brodacki.tindertest.repository.TableToMatchRepository;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -43,16 +47,35 @@ public class Controller {
     projectRepository.save(project);
   }
 
-  @PostMapping("/addLikeForProject/{idDev}/{idProject}")
-  public void addDevToMatch(@PathVariable Integer idDev, @PathVariable Integer idProject) {
+  @PostMapping("/addLikeForProject")
+  public String addDevToMatch(@RequestBody ProjectDevDto projectDevDto) {
 
-    if (tableToMatchRepository.findByDevIdAndProjectId(idDev, idProject) != null) {
-      System.out.println("rekord już istnieje");
+    Integer devId = projectDevDto.getIdDev();
+
+    Integer prjId = projectDevDto.getIdProject();
+
+    if (devId == null || prjId == null) {
+
+      ResponseEntity responseEntity =
+          new ResponseEntity("podano puste dane. Spróbuj ponownie", HttpStatus.BAD_REQUEST);
+      return responseEntity.getBody().toString();
     }
 
-    TableToMatch tableToMatch = new TableToMatch();
-    tableToMatch.setProjectId(idProject);
-    tableToMatch.setDevId(idDev);
-    tableToMatchRepository.save(tableToMatch);
+    Optional<TableToMatch> tableToMatchOptional =
+        tableToMatchRepository.findByDevIdAndProjectId(devId, prjId);
+
+    if (tableToMatchOptional.isPresent()) {
+      TableToMatch tableToMatch = tableToMatchOptional.get();
+      tableToMatch.setMatch(true);
+      tableToMatchRepository.save(tableToMatch);
+      return "Pomyślnie zmodyfikowano";
+    } else {
+
+      TableToMatch tableToMatch = new TableToMatch();
+      tableToMatch.setProjectId(prjId);
+      tableToMatch.setDevId(devId);
+      tableToMatchRepository.save(tableToMatch);
+      return "Pomyślnie zapisano";
+    }
   }
 }

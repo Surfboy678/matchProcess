@@ -9,8 +9,10 @@ public class TableToMatch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+   // @OneToOne
     private Integer devId;
 
+    //@OneToOne
     private Integer projectId;
 
     boolean isMatch;
@@ -38,6 +40,10 @@ public class TableToMatch {
         return projectId;
     }
 
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
     public boolean isMatch() {
         return isMatch;
     }
@@ -46,16 +52,13 @@ public class TableToMatch {
         isMatch = match;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
-
     @Override
     public String toString() {
         return "TableToMatch{" +
                 "id=" + id +
                 ", devId=" + devId +
                 ", projectId=" + projectId +
+                ", isMatch=" + isMatch +
                 '}';
     }
 }

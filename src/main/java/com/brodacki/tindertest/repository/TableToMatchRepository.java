@@ -4,19 +4,18 @@ import com.brodacki.tindertest.model.TableToMatch;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TableToMatchRepository extends JpaRepository<TableToMatch, Integer> {
 
-    TableToMatch findByDevId(Integer idDev);
+  TableToMatch findByDevId(Integer idDev);
 
-    TableToMatch findProjectIdByDevId(Integer idDev);
+  TableToMatch findProjectIdByDevId(Integer idDev);
 
-    @Override
-    boolean existsById(Integer idDev);
+  @Override
+  boolean existsById(Integer idDev);
 
-    List<TableToMatch> getAllByDevId(Integer idDev);
+  List<TableToMatch> getAllByDevId(Integer idDev);
 
-   TableToMatch findByDevIdAndProjectId(Integer idDev, Integer idProject);
-
-
+  Optional<TableToMatch> findByDevIdAndProjectId(Integer idDev, Integer idProject);
 }
