@@ -13,6 +13,8 @@ public class TableToMatch {
 
     private Integer projectId;
 
+    boolean isMatch;
+
     public TableToMatch() {
     }
 
@@ -34,6 +36,14 @@ public class TableToMatch {
 
     public Integer getProjectId() {
         return projectId;
+    }
+
+    public boolean isMatch() {
+        return isMatch;
+    }
+
+    public void setMatch(boolean match) {
+        isMatch = match;
     }
 
     public void setProjectId(Integer projectId) {
