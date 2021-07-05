@@ -8,8 +8,12 @@ import javax.persistence.*;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    String description;
+   private Integer id;
+   private String description;
+
+   @OneToOne
+   private TableToMatch tableToMatch;
+
 
 
     public Project() {
@@ -31,5 +35,11 @@ public class Project {
         this.description = description;
     }
 
+    public TableToMatch getTableToMatch() {
+        return tableToMatch;
+    }
 
+    public void setTableToMatch(TableToMatch tableToMatch) {
+        this.tableToMatch = tableToMatch;
+    }
 }

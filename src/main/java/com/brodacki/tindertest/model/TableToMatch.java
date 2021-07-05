@@ -9,11 +9,11 @@ public class TableToMatch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-   // @OneToOne
-    private Integer devId;
+    @OneToOne(cascade=CascadeType.ALL)
+    private Dev dev;
 
-    //@OneToOne
-    private Integer projectId;
+    @OneToOne(cascade=CascadeType.ALL)
+    private Project project;
 
     boolean isMatch;
 
@@ -28,20 +28,20 @@ public class TableToMatch {
         this.id = id;
     }
 
-    public Integer getDevId() {
-        return devId;
+    public Dev getDev() {
+        return dev;
     }
 
-    public void setDevId(Integer devId) {
-        this.devId = devId;
+    public void setDev(Dev dev) {
+        this.dev = dev;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public boolean isMatch() {
@@ -50,15 +50,5 @@ public class TableToMatch {
 
     public void setMatch(boolean match) {
         isMatch = match;
-    }
-
-    @Override
-    public String toString() {
-        return "TableToMatch{" +
-                "id=" + id +
-                ", devId=" + devId +
-                ", projectId=" + projectId +
-                ", isMatch=" + isMatch +
-                '}';
     }
 }

@@ -12,6 +12,9 @@ public class Dev {
 
   private String content;
 
+  @OneToOne
+  private TableToMatch tableToMatch;
+
 
 
   public Dev() {}
@@ -32,7 +35,13 @@ public class Dev {
     this.content = content;
   }
 
+  public TableToMatch getTableToMatch() {
+    return tableToMatch;
+  }
 
+  public void setTableToMatch(TableToMatch tableToMatch) {
+    this.tableToMatch = tableToMatch;
+  }
 }
 
 
