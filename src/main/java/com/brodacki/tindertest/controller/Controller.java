@@ -69,13 +69,17 @@ public class Controller {
       tableToMatch.setMatch(true);
       tableToMatchRepository.save(tableToMatch);
       return "Pomyślnie zmodyfikowano";
+
     } else {
 
       TableToMatch tableToMatch = new TableToMatch();
-      tableToMatch.setProjectId(prjId);
-      tableToMatch.setDevId(devId);
       tableToMatchRepository.save(tableToMatch);
       return "Pomyślnie zapisano";
     }
+  }
+
+  @GetMapping("/getMatchById/{idMatch}")
+  public TableToMatch getMatchById(@PathVariable Integer idMatch){
+    return tableToMatchRepository.getById(idMatch);
   }
 }
