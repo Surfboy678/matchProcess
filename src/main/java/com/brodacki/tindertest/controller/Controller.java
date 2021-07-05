@@ -73,6 +73,10 @@ public class Controller {
     } else {
 
       TableToMatch tableToMatch = new TableToMatch();
+      Dev getDevById = devRepository.getById(devId);
+      Project getProjectById = projectRepository.getById(prjId);
+      tableToMatch.setDev(getDevById);
+      tableToMatch.setProject(getProjectById);
       tableToMatchRepository.save(tableToMatch);
       return "Pomyślnie zapisano";
     }
